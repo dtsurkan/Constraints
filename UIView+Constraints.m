@@ -54,4 +54,30 @@
             constant:offset];
 }
 
+- (NSLayoutConstraint *)constraintByAttribute:(NSLayoutAttribute)attribute {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", attribute];
+    NSArray *filteredArray = [self.constraints filteredArrayUsingPredicate:predicate];
+    if (filteredArray.count == 0) {
+        return nil;
+    }
+    NSLayoutConstraint *constraint =  [filteredArray objectAtIndex:0];
+    return constraint;
+}
+
+- (NSLayoutConstraint *)constraintByAttribute:(NSLayoutAttribute)attribute toView:(UIView *)view {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstAttribute = %d", attribute];
+    NSArray *filteredArray = [self.constraints filteredArrayUsingPredicate:predicate];
+    predicate = [NSPredicate predicateWithFormat:@"firstItem = %@", view];
+    NSArray *secondFilteredArray = [filteredArray filteredArrayUsingPredicate:predicate];
+    if (secondFilteredArray.count == 0) {
+        predicate = [NSPredicate predicateWithFormat:@"secondItem = %@", view];
+        secondFilteredArray = [filteredArray filteredArrayUsingPredicate:predicate];
+    }
+    if (secondFilteredArray.count == 0) {
+        return nil;
+    }
+    NSLayoutConstraint *constraint =  [secondFilteredArray objectAtIndex:0];
+    return constraint;
+}
+
 @end
