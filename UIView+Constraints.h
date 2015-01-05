@@ -15,4 +15,7 @@
 - (NSLayoutConstraint *)leftOffsetFromView:(UIView *)view withConstant:(CGFloat)offset;
 - (NSLayoutConstraint *)topOffsetFromView:(UIView *)view withConstant:(CGFloat)offset;
 
+- (NSLayoutConstraint *)constraintByAttribute:(NSLayoutAttribute)attribute;
+- (NSLayoutConstraint *)constraintByAttribute:(NSLayoutAttribute)attribute toView:(UIView *)view;
+
 @end
